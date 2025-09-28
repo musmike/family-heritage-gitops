@@ -1,0 +1,36 @@
+image:
+  pullSecret: ghcr-secret
+
+postgres:
+  service:
+    type: ClusterIP
+    port: 5432
+  persistence:
+    size: 2Gi
+
+backend:
+  image:
+    repository: ghcr.io/musmike/family-heritage-home-server-app/family-heritage-backend
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8080
+  persistence:
+    size: 10Gi
+  springProfile: prod
+  
+frontend:
+  image:
+    repository: ghcr.io/musmike/family-heritage-home-server-app/family-heritage-frontend
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 80
+  env:
+    VITE_API_BASE_URL: ""
+
+ingress:
+  enabled: false
+  host: ""
+
+importSecrets: []

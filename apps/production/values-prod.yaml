@@ -1,0 +1,20 @@
+postgres:
+  existingSecret: postgres-secret-prod
+  
+backend:
+  existingSecret: backend-secret-prod
+  image:
+    tag: "prod-build-corsfix"
+  springProfile: prod
+
+frontend:
+  image:
+    tag: "prod-build"
+
+ingress:
+  enabled: true
+
+importSecrets:
+  - name: "{{ .Release.Name }}-values-secrets"
+    importKeys:
+      - values.yaml

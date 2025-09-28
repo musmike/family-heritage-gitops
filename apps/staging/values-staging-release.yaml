@@ -1,0 +1,20 @@
+postgres:
+  existingSecret: postgres-secret-staging-release
+  
+backend:
+  existingSecret: backend-secret-staging-release
+  image:
+    tag: "staging-release-build"
+  springProfile: staging-release
+
+frontend:
+  image:
+    tag: "staging-release-build"
+
+ingress:
+  enabled: true
+
+importSecrets:
+  - name: "{{ .Release.Name }}-values-secrets"
+    importKeys:
+      - values.yaml
