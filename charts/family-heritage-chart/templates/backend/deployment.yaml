@@ -23,9 +23,30 @@ spec:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/$(POSTGRES_DB)"
             - name: SPRING_DATASOURCE_USERNAME
-              value: "$(POSTGRES_USER)"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_USER
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "$(POSTGRES_PASSWORD)"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_PASSWORD
             - name: SPRING_PROFILES_ACTIVE
               value: "{{ .Values.backend.springProfile }}"
             - name: APP_JWT_SECRET
@@ -33,9 +54,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.backend.existingSecret }}
                   key: APP_JWT_SECRET
-          envFrom:
-            - secretRef:
-                name: {{ .Values.postgres.existingSecret }}
           volumeMounts:
             - name: media-storage
               mountPath: /media
