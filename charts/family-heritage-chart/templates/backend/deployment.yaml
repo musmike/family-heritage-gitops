@@ -21,9 +21,17 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/{{ .Values.postgres.dbName }}"
+              value: "jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/$(POSTGRES_DB)"
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_DB
             - name: SPRING_DATASOURCE_USERNAME
-              value: "{{ .Values.postgres.user }}"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: POSTGRES_USER
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:

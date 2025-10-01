@@ -1,20 +1,25 @@
+nodeName: "desktop-msi-z490"
+
 postgres:
   existingSecret: postgres-secret-prod
+  persistence:
+    path: /mnt/onedrive-data/home_server_files/family_heritage_prod/db_data
   
 backend:
   existingSecret: backend-secret-prod
   image:
-    tag: "prod-build-corsfix"
+    tag: "prod-build"
   springProfile: prod
+  persistence:
+    path: /mnt/onedrive-data/home_server_files/family_heritage_prod/media
 
 frontend:
   image:
     tag: "prod-build"
+  env:
+    VITE_API_BASE_URL: "http://api.familyheritage.192.168.100.144.nip.io"
 
 ingress:
   enabled: true
-
-importSecrets:
-  - name: "{{ .Release.Name }}-values-secrets"
-    importKeys:
-      - values.yaml
+  host: "familyheritage.192.168.100.144.nip.io"
+  apiHost: "api.familyheritage.192.168.100.144.nip.io"

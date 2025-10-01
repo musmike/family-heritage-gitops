@@ -1,2 +1,4 @@
 *secrets*.yaml
 *.pem
+vault-keys.json
+!*externalsecrets*
