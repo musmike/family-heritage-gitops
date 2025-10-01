@@ -22,6 +22,10 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/$(POSTGRES_DB)"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "$(POSTGRES_USER)"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "$(POSTGRES_PASSWORD)"
             - name: SPRING_PROFILES_ACTIVE
               value: "{{ .Values.backend.springProfile }}"
             - name: APP_JWT_SECRET
