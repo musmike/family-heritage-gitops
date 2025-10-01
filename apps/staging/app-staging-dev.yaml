@@ -5,14 +5,19 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
-    targetRevision: main
-    path: charts/family-heritage-chart
-    helm:
-      releaseName: staging-dev
-      valueFiles:
-        - ../../apps/staging/values-staging-dev.yaml
+  sources:
+    - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
+      targetRevision: main
+      path: eso
+      directory:
+        include: 'staging-dev-externalsecrets.yaml'
+    - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
+      targetRevision: main
+      path: charts/family-heritage-chart
+      helm:
+        releaseName: staging-dev
+        valueFiles:
+          - $values/../../apps/staging/values-staging-dev.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: staging-dev

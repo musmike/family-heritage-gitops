@@ -5,14 +5,19 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
-    targetRevision: main
-    path: charts/family-heritage-chart
-    helm:
-      releaseName: prod
-      valueFiles:
-        - ../../apps/production/values-prod.yaml
+  sources:
+    - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
+      targetRevision: main
+      path: eso
+      directory:
+        include: 'prod-externalsecrets.yaml'
+    - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
+      targetRevision: main
+      path: charts/family-heritage-chart
+      helm:
+        releaseName: prod
+        valueFiles:
+          - $values/../../apps/production/values-prod.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: prod
