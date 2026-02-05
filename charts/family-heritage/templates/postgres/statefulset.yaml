@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-postgres-deployment
+  name: {{ .Release.Name }}-postgres
 spec:
+  serviceName: {{ .Release.Name }}-postgres-headless
   replicas: 1
   selector:
     matchLabels:
@@ -17,6 +18,7 @@ spec:
           image: "postgres:15-alpine"
           ports:
             - containerPort: 5432
+              name: postgres
           envFrom:
             - secretRef:
                 name: {{ .Values.postgres.existingSecret }}

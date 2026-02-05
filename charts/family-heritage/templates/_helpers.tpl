@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "family-heritage-chart.name" -}}
+{{- define "family-heritage.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "family-heritage-chart.fullname" -}}
+{{- define "family-heritage.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "family-heritage-chart.chart" -}}
+{{- define "family-heritage.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "family-heritage-chart.labels" -}}
-helm.sh/chart: {{ include "family-heritage-chart.chart" . }}
-{{ include "family-heritage-chart.selectorLabels" . }}
+{{- define "family-heritage.labels" -}}
+helm.sh/chart: {{ include "family-heritage.chart" . }}
+{{ include "family-heritage.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "family-heritage-chart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "family-heritage-chart.name" . }}
+{{- define "family-heritage.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "family-heritage.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "family-heritage-chart.serviceAccountName" -}}
+{{- define "family-heritage.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "family-heritage-chart.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "family-heritage.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

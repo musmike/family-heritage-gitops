@@ -1,26 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: family-heritage-staging-dev
+  name: family-heritage-staging
   namespace: argocd
 spec:
   project: default
   sources:
     - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
       targetRevision: main
-      path: eso
+      path: envs/staging
+      ref: values
       directory:
-        include: 'staging-dev-externalsecrets.yaml'
+        include: '*.yaml'
+
     - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
       targetRevision: main
-      path: charts/family-heritage-chart
+      path: charts/family-heritage
       helm:
-        releaseName: staging-dev
+        releaseName: staging
         valueFiles:
-          - $values/../../apps/staging/values-staging-dev.yaml
+          - $values/envs/staging/values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: staging-dev
+    namespace: staging
   syncPolicy:
     automated:
       prune: true

@@ -8,16 +8,18 @@ spec:
   sources:
     - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
       targetRevision: main
-      path: eso
+      path: envs/prod
+      ref: values
       directory:
-        include: 'prod-externalsecrets.yaml'
+        include: '*.yaml'
+
     - repoURL: 'https://github.com/musmike/family-heritage-gitops.git'
       targetRevision: main
-      path: charts/family-heritage-chart
+      path: charts/family-heritage
       helm:
         releaseName: prod
         valueFiles:
-          - $values/../../apps/production/values-prod.yaml
+          - $values/envs/prod/values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: prod

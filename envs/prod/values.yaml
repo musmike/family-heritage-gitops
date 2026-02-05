@@ -3,7 +3,8 @@ nodeName: "desktop-msi-z490"
 postgres:
   existingSecret: postgres-secret-prod
   persistence:
-    path: /mnt/onedrive-data/home_server_files/family_heritage_prod/db_data
+    size: 2Gi
+    volumeName: "prod-postgres-pv"
   
 backend:
   existingSecret: backend-secret-prod
@@ -11,7 +12,8 @@ backend:
     tag: "prod-build"
   springProfile: prod
   persistence:
-    path: /mnt/onedrive-data/home_server_files/family_heritage_prod/media
+    size: 5Gi
+    volumeName: "prod-media-pv"
 
 frontend:
   image:

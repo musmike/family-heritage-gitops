@@ -5,6 +5,10 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: manual
+  {{- if .Values.backend.persistence.volumeName }}
+  volumeName: {{ .Values.backend.persistence.volumeName }}
+  {{- end }}
   resources:
     requests:
       storage: {{ .Values.backend.persistence.size }}
