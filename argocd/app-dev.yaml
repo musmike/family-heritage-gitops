@@ -3,6 +3,18 @@ kind: Application
 metadata:
   name: family-heritage-dev
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: |
+      backend=twoj-registry/backend:~dev,
+      frontend=twoj-registry/frontend:~dev
+    
+    argocd-image-updater.argoproj.io/backend.update-strategy: latest
+    argocd-image-updater.argoproj.io/frontend.update-strategy: latest
+    
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+    
+    argocd-image-updater.argoproj.io/backend.pull-secret: pullsecret:argocd/registry-creds
+    argocd-image-updater.argoproj.io/frontend.pull-secret: pullsecret:argocd/registry-creds
 spec:
   project: default
   sources:
