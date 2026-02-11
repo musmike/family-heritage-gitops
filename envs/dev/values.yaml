@@ -7,7 +7,7 @@ postgres:
 backend:
   existingSecret: backend-secret-dev
   image:
-    tag: ""
+    tag: "dev-89aa869"
   imagePullPolicy: Always
   springProfile: dev
   persistence:
@@ -15,7 +15,7 @@ backend:
     volumeName: "dev-media-pv"
 frontend:
   image:
-    tag: ""
+    tag: "dev-89aa869"
   imagePullPolicy: Always
   env:
     VITE_API_BASE_URL: "http://api.dev.192.168.100.144.nip.io"
