@@ -12,6 +12,8 @@ spec:
       labels:
         app: {{ .Release.Name }}-frontend
     spec:
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
       containers:
         - name: frontend
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
