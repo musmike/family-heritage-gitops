@@ -1,28 +1,24 @@
 nodeName: "desktop-msi-z490"
-
 postgres:
   existingSecret: postgres-secret-dev
   persistence:
     size: 2Gi
     volumeName: "dev-postgres-pv"
-  
 backend:
   existingSecret: backend-secret-dev
   image:
-    tag: "dev"
+    tag: "dev-7b271df"
   imagePullPolicy: Always
   springProfile: dev
   persistence:
     size: 5Gi
     volumeName: "dev-media-pv"
-
 frontend:
   image:
-    tag: "dev"
+    tag: "dev-7b271df"
   imagePullPolicy: Always
   env:
     VITE_API_BASE_URL: "http://api.dev.192.168.100.144.nip.io"
-
 ingress:
   enabled: true
   host: "dev.192.168.100.144.nip.io"
