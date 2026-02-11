@@ -1,6 +1,3 @@
-image:
-  pullSecret: ghcr-secret
-
 postgres:
   service:
     type: ClusterIP
