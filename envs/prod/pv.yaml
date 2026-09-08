@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   local:
-    path: /mnt/onedrive-data/family_heritage_prod/db_data
+    path: /mnt/onedrive-data/home_server_files/apps/family_heritage_prod/db_data
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -34,7 +34,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   local:
-    path: /mnt/onedrive-data/family_heritage_prod/media
+    path: /mnt/onedrive-data/home_server_files/apps/family_heritage_prod/media
   nodeAffinity:
     required:
       nodeSelectorTerms:
