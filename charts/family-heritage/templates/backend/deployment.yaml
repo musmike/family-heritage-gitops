@@ -46,6 +46,8 @@ spec:
               value: "$(POSTGRES_PASSWORD)"
             - name: SPRING_PROFILES_ACTIVE
               value: "{{ .Values.backend.springProfile }}"
+            - name: APP_CORS_ALLOWED_ORIGINS
+              value: "http://{{ .Values.ingress.host }}"
             - name: APP_JWT_SECRET
               valueFrom:
                 secretKeyRef:
