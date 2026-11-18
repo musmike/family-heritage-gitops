@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-postgres-service
+  name: {{ .Release.Name }}-postgres
 spec:
   type: ClusterIP
   selector:

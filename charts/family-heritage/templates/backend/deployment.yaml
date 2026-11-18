@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-backend-deployment
+  name: {{ .Release.Name }}-backend
 spec:
   replicas: 1
   selector:
@@ -17,6 +17,7 @@ spec:
       containers:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.imagePullPolicy | default "IfNotPresent" }}
           ports:
             - containerPort: 8080
           env:
@@ -37,7 +38,7 @@ spec:
                   key: POSTGRES_PASSWORD
             
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://{{ .Release.Name }}-postgres-service:5432/$(POSTGRES_DB)"
+              value: "jdbc:postgresql://{{ .Release.Name }}-postgres:5432/$(POSTGRES_DB)"
             
             - name: SPRING_DATASOURCE_USERNAME
               value: "$(POSTGRES_USER)"
@@ -61,4 +62,4 @@ spec:
       volumes:
         - name: media-storage
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-media-pvc
+            claimName: {{ .Release.Name }}-media

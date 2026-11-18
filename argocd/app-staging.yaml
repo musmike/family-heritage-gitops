@@ -17,15 +17,15 @@ spec:
       targetRevision: main
       path: charts/family-heritage
       helm:
-        releaseName: staging
+        releaseName: family-heritage-staging
         valueFiles:
           - $values/envs/staging/values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: staging
+    namespace: family-heritage-staging
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

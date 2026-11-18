@@ -17,15 +17,15 @@ spec:
       targetRevision: main
       path: charts/family-heritage
       helm:
-        releaseName: dev
+        releaseName: family-heritage-dev
         valueFiles:
           - $values/envs/dev/values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: dev
+    namespace: family-heritage-dev
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

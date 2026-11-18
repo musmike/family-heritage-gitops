@@ -4,7 +4,7 @@ postgres:
   existingSecret: postgres-secret-staging
   persistence:
     size: 2Gi
-    volumeName: "staging-postgres-pv"
+    volumeName: "family-heritage-staging-postgres-pv"
   
 backend:
   existingSecret: backend-secret-staging
@@ -12,16 +12,16 @@ backend:
     tag: "staging-build"
   springProfile: staging
   persistence:
-    size: 5Gi
-    volumeName: "staging-media-pv"
+    size: 10Gi
+    volumeName: "family-heritage-staging-media-pv"
 
 frontend:
   image:
     tag: "staging-build"
   env:
-    VITE_API_BASE_URL: "http://api.staging.192.168.100.144.nip.io"
+    VITE_API_BASE_URL: "http://api.familyheritage.staging.192.168.100.213.nip.io"
 
 ingress:
   enabled: true
-  host: "staging.192.168.100.144.nip.io"
-  apiHost: "api.staging.192.168.100.144.nip.io"
+  host: "familyheritage.staging.192.168.100.213.nip.io"
+  apiHost: "api.familyheritage.staging.192.168.100.213.nip.io"

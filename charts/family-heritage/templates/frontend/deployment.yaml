@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-frontend-deployment
+  name: {{ .Release.Name }}-frontend
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
       containers:
         - name: frontend
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
-          imagePullPolicy: Always 
+          imagePullPolicy: {{ .Values.frontend.imagePullPolicy | default "IfNotPresent" }} 
           ports:
             - containerPort: 80
           env:

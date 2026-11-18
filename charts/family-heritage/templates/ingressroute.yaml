@@ -10,11 +10,11 @@ spec:
     - match: Host(`{{ .Values.ingress.apiHost }}`)
       kind: Rule
       services:
-        - name: {{ .Release.Name }}-backend-service
+        - name: {{ .Release.Name }}-backend
           port: 8080
     - match: Host(`{{ .Values.ingress.host }}`)
       kind: Rule
       services:
-        - name: {{ .Release.Name }}-frontend-service
+        - name: {{ .Release.Name }}-frontend
           port: {{ .Values.frontend.service.port }}
 {{- end }}
