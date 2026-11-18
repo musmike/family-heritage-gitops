@@ -16,6 +16,9 @@ spec:
       containers:
         - name: postgres
           image: "postgres:15-alpine"
+          securityContext:
+            appArmorProfile:
+              type: Unconfined
           ports:
             - containerPort: 5432
               name: postgres
