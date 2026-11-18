@@ -7,7 +7,7 @@ postgres:
 backend:
   existingSecret: backend-secret-dev
   image:
-    tag: "dev-5d772d7"
+    tag: "dev-4fd0b20"
   imagePullPolicy: Always
   springProfile: dev
   persistence:
@@ -15,7 +15,7 @@ backend:
     volumeName: "family-heritage-dev-media-pv"
 frontend:
   image:
-    tag: "dev-5d772d7"
+    tag: "dev-4fd0b20"
   imagePullPolicy: Always
   env:
     VITE_API_BASE_URL: "http://api.familyheritage.dev.192.168.100.213.nip.io"
